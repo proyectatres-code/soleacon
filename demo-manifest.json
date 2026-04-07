@@ -1,0 +1,20 @@
+{
+  "name": "Ángel Durán Monte",
+  "short_name": "Ángel Durán",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a243f",
+  "theme_color": "#0a243f",
+  "icons": [
+    {
+      "src": "imagenes/logo-demo-inicio.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "imagenes/logo-demo-inicio.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
