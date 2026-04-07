@@ -500,6 +500,67 @@
     .equipo-btn:active{transform:translateY(0)}
     .equipo-btn svg{width:20px;height:20px;fill:#fff}
 
+    /* ===== Google Review ===== */
+    .review-section{
+      margin:24px 16px;
+      max-width:680px;
+    }
+    @media (min-width:600px){ .review-section{ margin:24px auto; } }
+    @media (min-width:900px){ .review-section{ max-width:960px; } }
+
+    .review-card{
+      background:#fff;
+      border-radius:24px;
+      padding:36px 24px 32px;
+      box-shadow:0 8px 32px rgba(0,0,0,.12);
+      text-align:center;
+    }
+    .review-qr-wrap{
+      width:180px;height:180px;
+      margin:0 auto 24px;
+      border-radius:18px;
+      border:2px dashed #e0e0e0;
+      background:#f8f9fa;
+      display:flex;align-items:center;justify-content:center;
+      overflow:hidden;
+      padding:12px;
+    }
+    .review-qr-wrap img{
+      width:100%;height:100%;
+      object-fit:contain;display:block;
+    }
+    .review-title{
+      font-size:clamp(22px,5vw,28px);
+      font-weight:800;color:#1a2a4a;
+      line-height:1.2;margin-bottom:10px;
+    }
+    .review-sub{
+      font-size:clamp(14px,3.2vw,16px);
+      color:#777;line-height:1.6;margin-bottom:18px;
+    }
+    .review-stars{
+      display:flex;justify-content:center;gap:6px;margin-bottom:24px;
+    }
+    .review-stars svg{
+      width:32px;height:32px;fill:#f5a623;
+    }
+    .review-btn{
+      display:inline-flex;align-items:center;gap:8px;
+      background:#fff;
+      color:#1a2a4a;
+      font-size:clamp(13px,3.2vw,15px);font-weight:800;letter-spacing:.3px;
+      padding:14px 28px;border-radius:50px;text-decoration:none;
+      border:2px solid #e0e0e0;
+      transition:border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+      width:100%;justify-content:center;
+    }
+    .review-btn:hover{
+      border-color:#4285f4;
+      box-shadow:0 4px 16px rgba(66,133,244,.2);
+      transform:translateY(-1px);
+    }
+    .review-btn img{ width:20px;height:20px; }
+
     /* ===== Toast ===== */
     .toast{
       position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(100px);
@@ -854,6 +915,28 @@
     </div>
 
 
+
+    <!-- Google Review -->
+    <div class="review-section">
+      <div class="review-card">
+        <div class="review-qr-wrap">
+          <img src="imagenes/reviews.png" alt="QR Google Reviews SOLEACON" loading="lazy">
+        </div>
+        <h2 class="review-title">¿Te gustó nuestro servicio?</h2>
+        <p class="review-sub">Escanea el código QR y déjanos tu reseña en Google</p>
+        <div class="review-stars">
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        </div>
+        <a href="https://g.page/r/CWghFNfVVhnhEBM/review" target="_blank" rel="noopener" class="review-btn">
+          <img src="https://www.google.com/favicon.ico" alt="Google">
+          Dejar mi reseña en Google
+        </a>
+      </div>
+    </div>
 
     <!-- Footer sutil -->
     <div style="text-align:center;padding:20px 20px 28px;font-size:12px;letter-spacing:0.5px;color:rgba(255,255,255,0.75);">
