@@ -765,10 +765,6 @@
       let current = 0;
       let autoTimer;
 
-      // Forzar ancho explícito
-      track.style.width = (total * 100) + '%';
-      slides.forEach(s => { s.style.width = (100 / total) + '%'; s.style.flexShrink = '0'; });
-
       slides.forEach((_,i)=>{
         const d = document.createElement('button');
         d.className = 'carousel-dot' + (i===0?' active':'');
@@ -779,7 +775,7 @@
 
       function goTo(n){
         current = (n + total) % total;
-        track.style.transform = 'translateX(-' + (current * (100/total)) + '%)';
+        track.style.transform = `translateX(-${current*100}%)`;
         dotsWrap.querySelectorAll('.carousel-dot').forEach((d,i)=>
           d.classList.toggle('active', i===current));
         resetAuto();
