@@ -222,6 +222,16 @@
     /* ===== SECCIÓN SERVICIOS — estilo minisitio ===== */
     .services-section{
       margin:24px 16px;
+      max-width:680px;
+    }
+    @media (min-width:600px){
+      .services-section{ margin:32px auto; }
+      .services-grid{ grid-template-columns:repeat(2,1fr); }
+      .service-card-img{ height:220px; }
+    }
+    @media (min-width:900px){
+      .services-section{ max-width:960px; }
+      .services-grid{ grid-template-columns:repeat(3,1fr); }
     }
 
     /* Encabezado de sección */
@@ -303,10 +313,10 @@
     .service-icon{
       position:absolute;top:14px;left:14px;
       width:52px;height:52px;border-radius:14px;
-      background:linear-gradient(135deg,#134aa7,#0a243f);
+      background:linear-gradient(135deg,#2e86de,#1a6bbf);
       display:flex;align-items:center;justify-content:center;
-      box-shadow:0 4px 14px rgba(0,0,0,.35);
-      border:1.5px solid rgba(255,255,255,.2);
+      box-shadow:0 4px 14px rgba(0,0,0,.3);
+      border:1.5px solid rgba(255,255,255,.35);
     }
     .service-icon svg{width:26px;height:26px;fill:#fff}
 
@@ -381,6 +391,14 @@
       border-radius:24px;
       overflow:hidden;
       box-shadow:0 12px 40px rgba(0,0,0,.25);
+      max-width:680px;
+    }
+    @media (min-width:600px){
+      .equipo-section{ margin:32px auto; }
+    }
+    @media (min-width:900px){
+      .equipo-section{ max-width:960px; }
+      .equipo-brands{ grid-template-columns:repeat(6,1fr); }
     }
 
     /* Imagen de fondo con overlay */
@@ -455,16 +473,16 @@
     }
     .equipo-btn{
       display:inline-flex;align-items:center;gap:10px;
-      background:linear-gradient(135deg,#134aa7,#0a243f);
+      background:#25d366;
       color:#fff;
       font-size:clamp(14px,3.5vw,16px);
       font-weight:800;letter-spacing:.4px;
       padding:16px 36px;border-radius:50px;text-decoration:none;
-      box-shadow:0 6px 24px rgba(10,36,63,.35);
-      transition:transform .15s ease, box-shadow .15s ease;
+      box-shadow:0 6px 24px rgba(37,211,102,.35);
+      transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
       width:100%;justify-content:center;
     }
-    .equipo-btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(10,36,63,.4)}
+    .equipo-btn:hover{background:#1ebe5d;transform:translateY(-2px);box-shadow:0 10px 30px rgba(37,211,102,.4)}
     .equipo-btn:active{transform:translateY(0)}
     .equipo-btn svg{width:20px;height:20px;fill:#fff}
 
@@ -586,7 +604,7 @@
         </div>
         <div class="contact-details">
           <h3>Email</h3>
-          <a id="email" class="clickable-link" href="/cdn-cgi/l/email-protection#e98a869d8093888a8086878c9ab69a86858c888a8687a9869c9d85868682c78a8684" onclick="showToast('Abriendo aplicación de email...')"><span class="__cf_email__" data-cfemail="b2d1ddc6dbc8d3d1dbdddcd7c1edc1ddded7d3d1dddcf2ddc7c6deddddd99cd1dddf">[email&#160;protected]</span></a>
+          <a id="email" class="clickable-link" href="mailto:cotizaciones_soleacon@outlook.com" onclick="showToast('Abriendo aplicación de email...')">cotizaciones_soleacon@outlook.com</a>
         </div>
       </div>
 
