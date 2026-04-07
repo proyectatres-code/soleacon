@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Demo;Angél;;;
+FN:Angel Durán Montelongo
+ORG:Industria de México
+TITLE:Gerente de Contabilidad y Finanzas
+TEL;TYPE=CELL,VOICE:+524778811195
+EMAIL;TYPE=INTERNET:demo@gmail.com
+URL:https://mipagina.com.mx/
+ADR;TYPE=WORK:;;Circuito San Roque Norte #345;Silao;Guanajuato;36275;México
+END:VCARD
