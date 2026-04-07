@@ -343,12 +343,12 @@
     .service-card p{font-size:13px;color:#777;line-height:1.45}
 
     /* ===== Carrusel servicios ===== */
-    .svc-carousel-wrap{position:relative;overflow:hidden;border-radius:12px;margin-bottom:10px;}
-    .svc-track{display:flex;transition:transform .4s cubic-bezier(.4,0,.2,1);}
-    .svc-slide{min-width:100%;}
+    .svc-carousel-wrap{position:relative;overflow:hidden;border-radius:12px;margin-bottom:10px;width:100%;}
+    .svc-track{display:flex;transition:transform .4s cubic-bezier(.4,0,.2,1);width:100%;}
+    .svc-slide{min-width:100%;width:100%;flex-shrink:0;box-sizing:border-box;}
     .svc-slide-inner{
       display:flex;align-items:center;gap:14px;
-      background:#fff;border-radius:12px;padding:18px 16px;
+      background:#fff;border-radius:12px;padding:18px 48px 18px 16px;
       border:1px solid #eaeaea;
       border-left:4px solid #e07b00;
       min-height:90px;
@@ -783,29 +783,44 @@
 
     // ===== Carrusel Servicios =====
     document.addEventListener('DOMContentLoaded', function(){
+      const wrap = document.querySelector('.svc-carousel-wrap');
       const track = document.getElementById('svcTrack');
       const dotsWrap = document.getElementById('svcDots');
-      if(!track) return;
+      if(!track || !wrap) return;
+
       const slides = track.querySelectorAll('.svc-slide');
       const total = slides.length;
       let cur = 0, timer;
+
+      // Forzar ancho de track y slides
+      track.style.width = (total * 100) + '%';
+      slides.forEach(s => s.style.width = (100 / total) + '%');
+
       slides.forEach((_,i)=>{
         const d = document.createElement('button');
-        d.className='svc-dot'+(i===0?' active':'');
-        d.onclick=()=>svcGo(i);
+        d.className = 'svc-dot' + (i===0 ? ' active' : '');
+        d.onclick = () => svcGo(i);
         dotsWrap.appendChild(d);
       });
+
       function svcGo(n){
-        cur=(n+total)%total;
-        track.style.transform=`translateX(-${cur*100}%)`;
-        dotsWrap.querySelectorAll('.svc-dot').forEach((d,i)=>d.classList.toggle('active',i===cur));
-        clearInterval(timer); timer=setInterval(()=>svcGo(cur+1),3500);
+        cur = (n + total) % total;
+        track.style.transform = 'translateX(-' + (cur * (100/total)) + '%)';
+        dotsWrap.querySelectorAll('.svc-dot').forEach((d,i) => d.classList.toggle('active', i===cur));
+        clearInterval(timer);
+        timer = setInterval(() => svcGo(cur + 1), 3500);
       }
-      window.svcMove=(dir)=>svcGo(cur+dir);
-      let sx=0;
-      track.addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});
-      track.addEventListener('touchend',e=>{const d=sx-e.changedTouches[0].clientX;if(Math.abs(d)>40)svcGo(cur+(d>0?1:-1));},{passive:true});
-      timer=setInterval(()=>svcGo(cur+1),3500);
+
+      window.svcMove = (dir) => svcGo(cur + dir);
+
+      let sx = 0;
+      track.addEventListener('touchstart', e => sx = e.touches[0].clientX, {passive:true});
+      track.addEventListener('touchend', e => {
+        const diff = sx - e.changedTouches[0].clientX;
+        if(Math.abs(diff) > 40) svcGo(cur + (diff > 0 ? 1 : -1));
+      }, {passive:true});
+
+      timer = setInterval(() => svcGo(cur + 1), 3500);
     });
 
     // ===== Carrusel Galería =====
