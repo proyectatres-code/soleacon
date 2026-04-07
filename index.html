@@ -598,8 +598,6 @@
             <div class="svc-slide-inner"><div class="service-icon"><svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg></div><div class="svc-text"><h3>Mantenimiento Preventivo</h3><p>Programas para garantizar el óptimo funcionamiento de tus equipos.</p></div></div>
             <div class="svc-slide-inner"><div class="service-icon"><svg viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg></div><div class="svc-text"><h3>Servicios Eléctricos</h3><p>Instalaciones eléctricas, cableado estructurado y soluciones de energía.</p></div></div>
             <div class="svc-slide-inner"><div class="service-icon"><svg viewBox="0 0 24 24"><path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9.95h-2V3.5h2V.55zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.7l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4zM20 10.5v2h3v-2h-3zm-8-5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-1 16.95h2V19.5h-2v2.95zm-7.45-3.91l1.41 1.41 1.79-1.8-1.41-1.41-1.79 1.8z"/></svg></div><div class="svc-text"><h3>Paneles Solares</h3><p>Instalación de sistemas de energía solar para reducir costos.</p></div></div>
-            <div class="svc-slide-inner"><div class="service-icon"><svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 19.5 2 22 .5 22 .5 22h21S22 12 17 8z"/></svg></div><div class="svc-text"><h3>Ventilación</h3><p>Sistemas de ventilación para climatización integral en cualquier espacio.</p></div></div>
-            <div class="svc-slide-inner"><div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></div><div class="svc-text"><h3>Garantía y Soporte</h3><p>Respaldo completo con garantía y atención post-venta personalizada.</p></div></div>
           </div>
         <!-- Servicios secundarios -->
         <div class="services-secondary">
@@ -767,6 +765,10 @@
       let current = 0;
       let autoTimer;
 
+      // Forzar ancho explícito
+      track.style.width = (total * 100) + '%';
+      slides.forEach(s => { s.style.width = (100 / total) + '%'; s.style.flexShrink = '0'; });
+
       slides.forEach((_,i)=>{
         const d = document.createElement('button');
         d.className = 'carousel-dot' + (i===0?' active':'');
@@ -777,13 +779,27 @@
 
       function goTo(n){
         current = (n + total) % total;
-        track.style.transform = `translateX(-${current*100}%)`;
+        track.style.transform = 'translateX(-' + (current * (100/total)) + '%)';
         dotsWrap.querySelectorAll('.carousel-dot').forEach((d,i)=>
           d.classList.toggle('active', i===current));
         resetAuto();
       }
 
       window.carouselMove = (dir)=> goTo(current + dir);
+
+      function resetAuto(){
+        clearInterval(autoTimer);
+        autoTimer = setInterval(()=>goTo(current+1), 4000);
+      }
+      resetAuto();
+
+      let startX=0;
+      track.addEventListener('touchstart',e=>startX=e.touches[0].clientX,{passive:true});
+      track.addEventListener('touchend',e=>{
+        const diff = startX - e.changedTouches[0].clientX;
+        if(Math.abs(diff)>40) goTo(current + (diff>0?1:-1));
+      },{passive:true});
+    })();
 
       function resetAuto(){
         clearInterval(autoTimer);
