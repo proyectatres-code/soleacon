@@ -1,0 +1,836 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#0a243f" />
+  <link rel="manifest" href="demo-manifest.json">
+
+  <!-- Icono pantalla de inicio (iOS + Android) -->
+  <link rel="apple-touch-icon" href="imagenes/foto-profile.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="imagenes/foto-profile.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="imagenes/foto-profile.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Ángel Durán">
+
+  <!-- =========================================================
+       SEO / Open Graph — ACTUALIZA solo si cambia el dominio/imagen
+       ========================================================= -->
+  <title>Tarjeta Digital – Ángel Durán Monte</title>
+  <meta name="description" content="Gerente de Finanzas y Contabilidad. Contáctame desde mi tarjeta digital.">
+
+  <!-- IMPORTANTE: que sea EXACTAMENTE la URL que compartes -->
+  <link rel="canonical" href="https://demo-beta-sage.vercel.app/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Tarjeta Digital – Ángel Durán Monte">
+  <meta property="og:description" content="Gerente de Finanzas y Contabilidad. Contáctame desde mi tarjeta digital.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tarjeta Digital">
+  <meta property="og:url" content="https://demo-beta-sage.vercel.app/">
+
+  <!-- Imagen OG (1200x630, <2MB). Usa el archivo que ya tienes en /imagenes -->
+  <meta property="og:image" content="https://demo-beta-sage.vercel.app/imagenes/card-preview.v3.jpg">
+  <meta property="og:image:secure_url" content="https://demo-beta-sage.vercel.app/imagenes/card-preview.v3.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:alt" content="Tarjeta digital de Ángel Durán Monte">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mi Tarjeta – Ángel Durán Monte">
+  <meta name="twitter:description" content="Gerente de Finanzas y Contabilidad. Contáctame desde mi tarjeta digital.">
+  <meta name="twitter:image" content="https://demo-beta-sage.vercel.app/imagenes/card-preview.v3.jpg">
+
+  <style>
+    /* ===== Reset & Vars ===== */
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --bg:#0a243f;
+      --card:rgba(255,255,255,.18);
+      --ink:#fff;
+      --accent:#7cc0ff;
+      --divider:linear-gradient(180deg,rgba(255,255,255,.28),rgba(0,0,0,.40),rgba(255,255,255,.22));
+      --link:#0a66ff;
+      --link-hover:#0751cc;
+    }
+    html,body{min-height:100%}
+    body{
+      font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background:linear-gradient(135deg,#153d6a 0%,#0a243f 100%);
+      color:#111; overflow-x:hidden; font-size:18px;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      text-rendering:optimizeLegibility;
+    }
+
+    /* ===== Splash (animación suave, logo más grande en móvil) ===== */
+    #splash{
+      position:fixed; inset:0; z-index:9999;
+      display:flex; align-items:center; justify-content:center;
+      background:url('https://i.postimg.cc/63f782QW/fondo-logo.jpg') center/cover no-repeat;
+      animation:fadeOut .5s ease-in-out 2.5s forwards;
+      will-change: opacity, visibility;
+      contain: content;
+    }
+    #splash-logo{
+      display:flex; align-items:center; justify-content:center;
+      opacity:0; transform:translateZ(0) scale(.72);
+      will-change: transform, opacity;
+      animation:logoAppear 1s ease-out .2s forwards;
+    }
+    #splash-logo img{
+      max-width:92vw;     /* más grande en móvil */
+      max-height:55vh;    /* más alto en móvil */
+      object-fit:contain;
+    }
+    @media (min-width:768px){
+      #splash-logo img{ max-width:42vw; max-height:50vh; }
+    }
+    @keyframes logoAppear{
+      0%   { opacity:0; transform:translateZ(0) scale(.72); }
+      60%  { opacity:1; transform:translateZ(0) scale(1.06); }
+      85%  { opacity:1; transform:translateZ(0) scale(.995); }
+      100% { opacity:1; transform:translateZ(0) scale(1); }
+    }
+    @keyframes fadeOut{ to{ opacity:0; visibility:hidden; } }
+    #app{ opacity:0; animation:appFadeIn .5s ease-in-out 2.8s forwards; }
+    @keyframes appFadeIn{ to{ opacity:1; } }
+
+    @media (prefers-reduced-motion: reduce){
+      #splash, #splash-logo, #app{ animation:none !important; }
+      #splash-logo{ opacity:1; transform:none; }
+      #app{ opacity:1; }
+    }
+
+    /* ===== Header ===== */
+    .header{
+      background:linear-gradient(135deg,#134aa7 0%,#0a243f 100%);
+      padding:40px 20px; text-align:center; box-shadow:0 4px 6px rgba(0,0,0,.1);
+    }
+    .profile-photo{
+      width:150px;height:150px;border-radius:50%;background:#e0e0e0;margin:0 auto 20px;
+      overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.2);border:2px solid #fff;
+      display:flex;align-items:center;justify-content:center;
+    }
+    .profile-photo img{width:100%;height:100%;object-fit:cover;object-position:center}
+
+    .name{
+      color:#fff;
+      font-size:clamp(24px,5vw,32px);
+      line-height:1.15;
+      margin-bottom:8px;
+      font-weight:700;
+      letter-spacing:-0.2px;
+    }
+    .title{
+      color:rgba(255,255,255,.92);
+      font-size:clamp(14px,2.6vw,18px);
+      margin-bottom:22px;
+      font-weight:500;
+    }
+
+    /* ===== Botonera superior ===== */
+    .action-wrap{padding:0 16px}
+    .action-buttons{
+      position:relative;display:flex;align-items:stretch;gap:0;
+      max-width:520px;margin:0 auto;background:var(--card);border-radius:18px;padding:6px;
+      box-shadow:0 10px 24px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.30), inset 0 -1px 0 rgba(0,0,0,.16);
+      backdrop-filter:blur(2px);overflow:hidden
+    }
+    .divider{width:1px;margin:6px 6px;background:var(--divider);opacity:.9;pointer-events:none}
+    .action-btn{
+      flex:1 1 0;border:0;cursor:pointer;background:transparent;color:var(--ink);
+      padding:clamp(8px,2vw,12px) 4px;border-radius:12px;
+      font-size:clamp(11px,2.8vw,13px);font-weight:800;text-transform:uppercase;
+      display:flex;align-items:center;justify-content:center;gap:5px;text-decoration:none;
+      min-height:46px;transition:box-shadow .15s ease,background .15s ease,transform .05s ease
+    }
+    .action-btn svg{width:15px;height:15px;flex-shrink:0;fill:currentColor}
+    .action-btn:hover{background:rgba(255,255,255,.10)}
+    .action-btn:active{transform:translateY(1px);background:rgba(255,255,255,.12)}
+    .action-btn--white{color:#fff;text-decoration:none}
+
+    .icon-btn{flex:0 0 auto;width:46px;height:46px;border-radius:12px;padding:0;display:flex;align-items:center;justify-content:center}
+    .icon-btn svg{width:20px;height:20px}
+
+    @media (max-width:360px){
+      .action-buttons{max-width:100%}
+      .action-btn{font-size:11.5px;padding:9px 8px;min-height:44px}
+      .icon-btn{width:44px;height:44px}
+    }
+
+    /* ===== Tarjeta de contacto ===== */
+    .contact-info{
+      background:#fff;margin:20px;border-radius:16px;padding:24px;
+      box-shadow:0 8px 32px rgba(0,0,0,.1)
+    }
+    .contact-item{display:flex;align-items:flex-start;gap:15px;padding:14px 0;border-bottom:1px solid #f0f0f0;transition:background .25s ease}
+    .contact-item:last-child{border-bottom:none}
+    .contact-item:hover{background:#f8f9fa;border-radius:8px}
+    .contact-icon{
+      width:42px;height:42px;background:#f0f7ff;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;color:#0f3156;flex:0 0 42px;margin-top:2px
+    }
+    .contact-details h3{
+      font-size:clamp(14px,3vw,18px);
+      color:#666;margin-bottom:4px;text-transform:uppercase;
+      font-weight:400; letter-spacing:.4px;
+    }
+    .contact-details p{
+      font-size:clamp(15px,3.4vw,17px);
+      color:#333;font-weight:500;
+      overflow-wrap:anywhere;word-break:break-word;
+      line-height:1.25;
+    }
+
+    /* Links (Email/Phone/Web/Address) igual que el “dato Email” de la plantilla */
+    .contact-details a,
+    .contact-details .clickable-link{
+      font-size:clamp(15px,3.4vw,17px);
+      line-height:1.25;
+      font-weight:500;
+      color:#0066cc; /* azul de datos */
+      text-decoration:none;
+      display:inline-block;
+      overflow-wrap:anywhere;
+      word-break:break-word;
+      transition:color .15s ease;
+    }
+    .contact-details a:hover,
+    .contact-details .clickable-link:hover{ color:#0751cc; }
+
+    /* ===== Redes ===== */
+    .social-section{
+      background:#fff;margin:20px;border-radius:16px;padding:18px;
+      box-shadow:0 8px 32px rgba(0,0,0,.1)
+    }
+    .social-title{font-size:20px;font-weight:700;color:#333;margin-bottom:12px;text-align:center}
+    .social-links{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .social-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px;min-height:80px;border:2px solid #f0f0f0;border-radius:10px;text-decoration:none;color:#666;background:#fafafa;transition:all .15s ease}
+    .social-btn:hover{border-color:#e0e0e0;transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.1);background:#fff}
+    .social-btn img{width:clamp(26px,5vw,34px);height:clamp(26px,5vw,34px);margin-bottom:6px}
+    .social-btn span{font-size:clamp(9px,2.2vw,10px);letter-spacing:.5px;text-transform:uppercase;font-weight:700}
+
+    /* ===== Servicios ===== */
+    .services-section{
+      background:#fff;margin:20px;border-radius:16px;padding:18px 18px 22px;
+      box-shadow:0 8px 32px rgba(0,0,0,.1)
+    }
+    .services-title{font-size:20px;font-weight:700;color:#333;margin-bottom:4px;text-align:center}
+    .services-subtitle{font-size:13px;color:#888;text-align:center;margin-bottom:14px}
+    .services-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+    }
+    .service-card{
+      background:#f8f9fa;border-radius:12px;padding:14px 12px;
+      border:1px solid #f0f0f0;
+      transition:transform .15s ease, box-shadow .15s ease;
+    }
+    .service-card:hover{transform:translateY(-2px);box-shadow:0 4px 14px rgba(0,0,0,.09)}
+    .service-icon{
+      width:40px;height:40px;border-radius:10px;
+      background:#fff3e0;
+      display:flex;align-items:center;justify-content:center;
+      margin-bottom:10px;
+    }
+    .service-icon svg{width:22px;height:22px;fill:#e07b00}
+    .service-card h3{font-size:13px;font-weight:700;color:#1a1a2e;margin-bottom:5px;line-height:1.2}
+    .service-card p{font-size:11.5px;color:#666;line-height:1.45}
+
+    /* ===== Galería ===== */
+    .gallery-section{
+      background:#fff;margin:20px;border-radius:16px;padding:18px 18px 22px;
+      box-shadow:0 8px 32px rgba(0,0,0,.1);overflow:hidden;
+    }
+    .gallery-title{font-size:20px;font-weight:700;color:#333;margin-bottom:14px;text-align:center}
+    .carousel-wrap{position:relative;overflow:hidden;border-radius:12px;max-width:400px;height:300px;margin:0 auto;}
+    .carousel-track{
+      display:flex;transition:transform .45s cubic-bezier(.4,0,.2,1);
+      will-change:transform;
+    }
+    .carousel-slide{
+      min-width:100%;position:relative;
+      height:300px;
+      background:#f0f0f0;overflow:hidden;
+    }
+    .carousel-slide img{
+      width:100%;height:100%;object-fit:cover;
+      transition:transform .6s ease;
+      display:block;
+    }
+    .carousel-slide:hover img{transform:scale(1.04)}
+    .carousel-caption{
+      position:absolute;bottom:0;left:0;right:0;
+      background:linear-gradient(transparent,rgba(0,0,0,.55));
+      color:#fff;padding:20px 14px 12px;
+      font-size:13px;font-weight:600;letter-spacing:.3px;
+    }
+    /* Flechas */
+    .carousel-btn{
+      position:absolute;top:50%;transform:translateY(-50%);
+      background:rgba(255,255,255,.85);border:none;cursor:pointer;
+      width:34px;height:34px;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      box-shadow:0 2px 8px rgba(0,0,0,.2);z-index:10;
+      transition:background .15s ease;
+    }
+    .carousel-btn:hover{background:#fff}
+    .carousel-btn svg{width:18px;height:18px;fill:#333}
+    .carousel-prev{left:8px}
+    .carousel-next{right:8px}
+    /* Dots */
+    .carousel-dots{display:flex;justify-content:center;gap:6px;margin-top:10px}
+    .carousel-dot{
+      width:8px;height:8px;border-radius:50%;
+      background:#ddd;border:none;cursor:pointer;padding:0;
+      transition:background .25s ease, transform .25s ease;
+    }
+    .carousel-dot.active{background:#e07b00;transform:scale(1.25)}
+
+    /* ===== Servicios ===== */
+    .services-section{
+      margin:20px;border-radius:16px;overflow:hidden;
+      box-shadow:0 8px 32px rgba(0,0,0,.12);
+    }
+    .services-header{
+      background:linear-gradient(135deg,#0a243f 0%,#134aa7 100%);
+      padding:22px 20px 18px;text-align:center;
+    }
+    .services-eyebrow{
+      display:inline-block;background:rgba(255,165,0,.18);
+      color:#ffa94d;font-size:10px;font-weight:800;letter-spacing:1.4px;
+      text-transform:uppercase;padding:3px 12px;border-radius:20px;margin-bottom:10px;
+    }
+    .services-header-title{font-size:clamp(18px,4.5vw,22px);font-weight:800;color:#fff;margin-bottom:6px}
+    .services-header-sub{font-size:12px;color:rgba(255,255,255,.72);line-height:1.5}
+
+    /* Bloque principal */
+    .services-body{background:#f4f6f9;padding:16px}
+
+    .services-label{
+      font-size:10px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;
+      color:#888;margin:0 0 10px 2px;
+    }
+    .services-grid{
+      display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px;
+    }
+    .service-card{
+      background:#fff;border-radius:14px;padding:14px 12px 12px;
+      border:1px solid #eaeaea;
+      transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+      position:relative;overflow:hidden;
+    }
+    .service-card::before{
+      content:'';position:absolute;top:0;left:0;right:0;height:3px;
+      background:linear-gradient(90deg,#e07b00,#ffa94d);
+      opacity:0;transition:opacity .2s ease;
+    }
+    .service-card:hover{transform:translateY(-3px);box-shadow:0 6px 18px rgba(0,0,0,.1);border-color:#ddd}
+    .service-card:hover::before{opacity:1}
+    .service-icon{
+      width:42px;height:42px;border-radius:12px;
+      background:linear-gradient(135deg,#fff3e0,#ffe0b2);
+      display:flex;align-items:center;justify-content:center;margin-bottom:10px;
+    }
+    .service-icon svg{width:22px;height:22px;fill:#e07b00}
+    .service-card h3{font-size:15px;font-weight:700;color:#1a1a2e;margin-bottom:4px;line-height:1.2}
+    .service-card p{font-size:13px;color:#777;line-height:1.45}
+
+    /* Servicios secundarios */
+    .services-secondary{
+      background:#fff;border-radius:14px;padding:14px;border:1px solid #eaeaea;
+    }
+    .services-secondary-title{
+      font-size:11px;font-weight:800;color:#e07b00;letter-spacing:.8px;
+      text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:6px;
+    }
+    .secondary-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+    .secondary-card{
+      display:flex;align-items:center;gap:8px;
+      background:#f8f9fa;border-radius:10px;padding:10px 10px;
+      border:1px solid #f0f0f0;
+      transition:background .15s ease;
+    }
+    .secondary-card:hover{background:#fff3e0}
+    .secondary-icon{
+      width:32px;height:32px;border-radius:8px;flex-shrink:0;
+      background:linear-gradient(135deg,#fff3e0,#ffe0b2);
+      display:flex;align-items:center;justify-content:center;
+    }
+    .secondary-icon svg{width:16px;height:16px;fill:#e07b00}
+    .secondary-card span{font-size:13px;font-weight:700;color:#333;line-height:1.2}
+
+    /* ===== Equipos ===== */
+    .equipo-section{
+      margin:20px;border-radius:16px;padding:24px 20px;
+      background:linear-gradient(135deg,#0a243f 0%,#134aa7 100%);
+      box-shadow:0 8px 32px rgba(0,0,0,.18);
+      text-align:center;
+    }
+    .equipo-badge{
+      display:inline-block;
+      background:rgba(255,255,255,.12);
+      color:#ffa94d;font-size:11px;font-weight:800;letter-spacing:1.2px;
+      text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:12px;
+    }
+    .equipo-title{
+      font-size:clamp(20px,5vw,26px);font-weight:800;
+      color:#fff;line-height:1.2;margin-bottom:10px;
+    }
+    .equipo-copy{
+      font-size:clamp(13px,3vw,15px);color:rgba(255,255,255,.82);
+      line-height:1.55;margin-bottom:20px;
+    }
+    .equipo-brands{
+      display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-bottom:22px;
+    }
+    .equipo-brand-tag{
+      background:rgba(255,255,255,.1);color:rgba(255,255,255,.9);
+      font-size:11px;font-weight:700;letter-spacing:.5px;
+      padding:4px 10px;border-radius:20px;border:1px solid rgba(255,255,255,.18);
+    }
+    .equipo-btn{
+      display:inline-flex;align-items:center;gap:8px;
+      background:#e07b00;color:#fff;
+      font-size:14px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;
+      padding:13px 28px;border-radius:30px;text-decoration:none;
+      box-shadow:0 4px 16px rgba(224,123,0,.4);
+      transition:background .15s ease, transform .1s ease, box-shadow .15s ease;
+    }
+    .equipo-btn:hover{background:#c96e00;transform:translateY(-1px);box-shadow:0 6px 20px rgba(224,123,0,.5)}
+    .equipo-btn:active{transform:translateY(0)}
+    .equipo-btn svg{width:16px;height:16px;fill:#fff}
+
+    /* ===== Toast ===== */
+    .toast{
+      position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(100px);
+      background:#333;color:#fff;padding:12px 24px;border-radius:25px;font-size:14px;z-index:1000;transition:transform .3s ease
+    }
+    .toast.show{transform:translateX(-50%) translateY(0)}
+    /* ===== QR Modal ===== */
+    .qr-overlay{
+      position:fixed;inset:0;z-index:8000;
+      background:rgba(0,0,0,0);
+      display:flex;align-items:center;justify-content:center;
+      padding:24px;pointer-events:none;
+      transition:background .35s ease;
+    }
+    .qr-overlay.active{
+      background:rgba(0,0,0,.75);
+      pointer-events:all;
+      backdrop-filter:blur(6px);
+    }
+    .qr-card{
+      background:linear-gradient(160deg,#1a3a6a 0%,#0a243f 100%);
+      border:1px solid rgba(255,255,255,0.15);
+      border-radius:24px;padding:28px 24px 22px;
+      width:min(88vw,340px);
+      box-shadow:0 24px 60px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,0.05);
+      display:flex;flex-direction:column;align-items:center;gap:16px;
+      opacity:0;transform:translateY(32px) scale(.94);
+      transition:opacity .38s cubic-bezier(.22,1,.36,1),transform .38s cubic-bezier(.22,1,.36,1);
+    }
+    .qr-overlay.active .qr-card{opacity:1;transform:translateY(0) scale(1);}
+    .qr-label{font-size:13px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:rgba(255,255,255,0.55);}
+    .qr-img-wrap{width:100%;border-radius:14px;overflow:hidden;border:1.5px solid rgba(255,255,255,0.15);box-shadow:0 0 20px rgba(0,0,0,0.3);}
+    .qr-img-wrap img{width:100%;height:auto;display:block;}
+    .qr-close{
+      margin-top:4px;background:rgba(255,255,255,0.10);
+      border:1.5px solid rgba(255,255,255,0.25);color:#fff;
+      border-radius:50px;padding:9px 32px;
+      font-size:13px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;
+      cursor:pointer;transition:background .15s ease,transform .1s ease;
+    }
+    .qr-close:hover{background:rgba(255,255,255,0.20);}
+    .qr-close:active{transform:scale(.97);}
+  </style>
+</head>
+<body>
+
+  <!-- Splash -->
+  <div id="splash" aria-hidden="true">
+    <div id="splash-logo">
+      <img src="https://i.postimg.cc/3wgjZwwC/logo-splash.png" alt="Logo" loading="lazy">
+    </div>
+  </div>
+
+  <!-- App -->
+  <div id="app">
+    <header class="header">
+      <div class="profile-photo">
+        <img src="imagenes/foto-profile.png" alt="Foto de perfil" loading="lazy">
+      </div>
+      <h1 class="name">SOLEACON</h1>
+      <p class="title">Expertos en instalación, mantenimiento y reparación de aire acondicionado. Soluciones eléctricas y energía solar para hogares y empresas.</p>
+
+      <div class="action-wrap">
+        <div class="action-buttons" role="group" aria-label="Acciones">
+          <!-- Guardar contacto -->
+          <a class="action-btn" href="soleacon.vcf" download="soleacon.vcf" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+            Guardar
+          </a>
+
+          <span class="divider" aria-hidden="true"></span>
+
+          <!-- QR -->
+          <button class="action-btn action-btn--white" type="button" onclick="openQR()">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h7v7H3zm1 1v5h5V4zm1 1h3v3H5zm8-2h7v7h-7zm1 1v5h5V4zm1 1h3v3h-3zM3 13h7v7H3zm1 1v5h5v-5zm1 1h3v3H5zm8 0h2v2h-2zm0 4h2v2h-2zm-2-4h2v2h-2zm4 0h2v2h-2zm2 2h2v2h-2zm-4 0h2v2h-2zm0 2h2v2h-2zm2 0h2v2h-2z"/></svg>
+            QR
+          </button>
+
+          <span class="divider" aria-hidden="true"></span>
+
+          <!-- Ubicación -->
+          <a class="action-btn action-btn--white"
+             href="https://www.google.com/maps/search/?api=1&query=Efeso%20436%2C%20Predio%20San%20Pablo%20Sur%2C%2037207%20Le%C3%B3n%20de%20los%20Aldama%2C%20Gto."
+             target="_blank" rel="noopener" onclick="showToast('Abriendo Google Maps...')">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Ubicación
+          </a>
+
+          <span class="divider" aria-hidden="true"></span>
+
+          <!-- Compartir (MISMO SVG original) -->
+          <button class="icon-btn" type="button" onclick="shareCard()" aria-label="Compartir" title="Compartir">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7a3.3 3.3 0 0 0 0-1.39l7.02-4.11A2.99 2.99 0 0 0 18 7.91c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .23.03.45.08.66L8.05 9.78A2.99 2.99 0 0 0 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.89 0 1.69-.39 2.25-1l7.03 4.11c-.05.2-.08.42-.08.64 0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Contacto -->
+    <div class="contact-info">
+      <div class="contact-item">
+        <div class="contact-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1  1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+        </div>
+        <div class="contact-details">
+          <h3>Teléfono</h3>
+          <a id="phone" class="clickable-link" href="tel:+5214776655037" onclick="showToast('Abriendo aplicación de teléfono...')">+52 1 477 665 5037</a>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </div>
+        <div class="contact-details">
+          <h3>Email</h3>
+          <a id="email" class="clickable-link" href="mailto:cotizaciones_soleacon@outlook.com" onclick="showToast('Abriendo aplicación de email...')">cotizaciones_soleacon@outlook.com</a>
+        </div>
+      </div>
+
+      <!-- Sitio Web oculto temporalmente
+      <div class="contact-item">
+        <div class="contact-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+        </div>
+        <div class="contact-details">
+          <h3>Sitio Web</h3>
+          <a id="website" class="clickable-link" href="https://mipagina.com.mx/" target="_blank" rel="noopener" onclick="showToast('Abriendo sitio web...')">https://mipagina.com.mx/</a>
+        </div>
+      </div>
+      -->
+
+      <div class="contact-item">
+        <div class="contact-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        </div>
+        <div class="contact-details">
+          <h3>Dirección</h3>
+          <a id="address" class="clickable-link" target="_blank" rel="noopener"
+             href="https://www.google.com/maps/search/?api=1&query=Efeso%20436%2C%20Predio%20San%20Pablo%20Sur%2C%2037207%20Le%C3%B3n%20de%20los%20Aldama%2C%20Gto."
+             onclick="showToast('Abriendo Google Maps...')">
+            Efeso 436, Predio San Pablo Sur, 37207 León de los Aldama, Gto., León, Mexico, 37207
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Redes -->
+    <div class="social-section">
+      <h2 class="social-title">Sígueme en Redes Sociales</h2>
+      <div class="social-links">
+        <a class="social-btn" href="https://www.facebook.com/soleacon" target="_blank" rel="noopener">
+          <img src="imagenes/facebook.png" alt="Facebook" loading="lazy"><span>Facebook</span>
+        </a>
+        <a class="social-btn" href="https://g.page/r/CWghFNfVVhnhEBM/review" target="_blank" rel="noopener">
+          <img src="imagenes/gmb.png" alt="Google My Business" loading="lazy"><span>Google</span>
+        </a>
+        <a class="social-btn" href="https://wa.me/524778811195?text=Hola%2C%20me%20interesa%20la%20tarjeta%20digital" target="_blank" rel="noopener">
+          <img src="imagenes/whatsapp.png" alt="WhatsApp" loading="lazy"><span>WhatsApp</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Servicios -->
+    <div class="services-section">
+      <div class="services-header">
+        <div class="services-eyebrow">⚡ Lo que hacemos</div>
+        <h2 class="services-header-title">Soluciones integrales de climatización</h2>
+        <p class="services-header-sub">Atendemos proyectos residenciales, comerciales e industriales en León y zona metropolitana</p>
+      </div>
+      <div class="services-body">
+
+        <p class="services-label">Servicios principales</p>
+        <div class="services-grid">
+
+          <div class="service-card">
+            <div class="service-icon">
+              <svg viewBox="0 0 24 24"><path d="M22 11h-4.17l3.24-3.24-1.41-1.42L15 11h-2V9l4.66-4.66-1.42-1.41L13 6.17V2h-2v4.17L7.76 2.93 6.34 4.34 11 9v2H9L4.34 6.34 2.93 7.76 6.17 11H2v2h4.17l-3.24 3.24 1.41 1.42L9 13h2v2l-4.66 4.66 1.42 1.41L11 17.83V22h2v-4.17l3.24 3.24 1.42-1.41L13 15v-2h2l4.66 4.66 1.41-1.42L17.83 13H22z"/></svg>
+            </div>
+            <h3>Aire Acondicionado</h3>
+            <p>Venta, instalación y mantenimiento residencial, comercial e industrial.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">
+              <svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>
+            </div>
+            <h3>Mantenimiento Preventivo</h3>
+            <p>Programas para garantizar el óptimo funcionamiento de tus equipos.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">
+              <svg viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>
+            </div>
+            <h3>Servicios Eléctricos</h3>
+            <p>Instalaciones eléctricas, cableado estructurado y soluciones de energía.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">
+              <svg viewBox="0 0 24 24"><path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9.95h-2V3.5h2V.55zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.7l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4zM20 10.5v2h3v-2h-3zm-8-5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-1 16.95h2V19.5h-2v2.95zm-7.45-3.91l1.41 1.41 1.79-1.8-1.41-1.41-1.79 1.8z"/></svg>
+            </div>
+            <h3>Paneles Solares</h3>
+            <p>Instalación de sistemas de energía solar para reducir costos.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">
+              <svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 19.5 2 22 .5 22 .5 22h21S22 12 17 8z"/></svg>
+            </div>
+            <h3>Ventilación</h3>
+            <p>Sistemas de ventilación para climatización integral en cualquier espacio.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+            </div>
+            <h3>Garantía y Soporte</h3>
+            <p>Respaldo completo con garantía y atención post-venta personalizada.</p>
+          </div>
+
+        </div>
+
+        <!-- Servicios secundarios -->
+        <div class="services-secondary">
+          <div class="services-secondary-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#e07b00"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg>
+            También ofrecemos
+          </div>
+          <div class="secondary-grid">
+
+            <div class="secondary-card">
+              <div class="secondary-icon">
+                <svg viewBox="0 0 24 24"><path d="M17.5 7H17V5l-1.5-3h-8L6 5v2h-.5C4.67 7 4 7.67 4 8.5v7c0 .83.67 1.5 1.5 1.5H6v2h2v-2h8v2h2v-2h.5c.83 0 1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zM8.5 5.5l1-2h5l1 2H8.5zM7 16v-6h10v6H7z"/></svg>
+              </div>
+              <span>Cargadores para Autos Eléctricos</span>
+            </div>
+
+            <div class="secondary-card">
+              <div class="secondary-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h6v-5h2v5h6v-8h3L12 3z"/></svg>
+              </div>
+              <span>Impermeabilización</span>
+            </div>
+
+            <div class="secondary-card">
+              <div class="secondary-icon">
+                <svg viewBox="0 0 24 24"><path d="M18 4l-4 4h-1.5l-3-3c-1.12-1.12-2.93-1.17-4.07-.02L3 7.4 5.55 10l1.45-1.45 5.2 5.2-1.45 1.45L13.3 17.6l2.45-2.45c1.15-1.15 1.1-2.96-.02-4.07l-3-3V6.5l4-4H18zm.5 5c-.28 0-.5.22-.5.5v.5h-2v1.5l2 2V14c0 .28.22.5.5.5s.5-.22.5-.5v-.5h.5c.28 0 .5-.22.5-.5v-3c0-.28-.22-.5-.5-.5H19v-.5c0-.28-.22-.5-.5-.5z"/></svg>
+              </div>
+              <span>Pintura</span>
+            </div>
+
+            <div class="secondary-card">
+              <div class="secondary-icon">
+                <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.08 3.11H5.77L6.85 7zM19 17H5v-5h14v5z"/></svg>
+              </div>
+              <span>Fontanería</span>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Equipos -->
+    <div class="equipo-section">
+      <div class="equipo-badge">⚡ Venta de Equipos</div>
+      <h2 class="equipo-title">Equipa tu espacio con la mejor tecnología</h2>
+      <p class="equipo-copy">
+        Vendemos e instalamos equipos de aire acondicionado, sistemas eléctricos y energía solar de las marcas líderes del mercado. Asesoría personalizada para que elijas el equipo ideal según tu espacio y presupuesto.
+      </p>
+      <div class="equipo-brands">
+        <span class="equipo-brand-tag">Carrier</span>
+        <span class="equipo-brand-tag">Mirage</span>
+        <span class="equipo-brand-tag">LG</span>
+        <span class="equipo-brand-tag">Mabe</span>
+        <span class="equipo-brand-tag">Samsung</span>
+        <span class="equipo-brand-tag">Daikin</span>
+      </div>
+      <a href="https://wa.me/5214776655037?text=Hola%2C%20me%20interesa%20ver%20el%20cat%C3%A1logo%20de%20equipos" target="_blank" rel="noopener" class="equipo-btn">
+        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14l4-4h12c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 9H7v-2h7v2zm3-4H7V6h10v2z"/></svg>
+        Ver Catálogo
+      </a>
+    </div>
+
+    <!-- Galería -->
+    <div class="gallery-section">
+      <h2 class="gallery-title">Galería de Trabajos</h2>
+      <div class="carousel-wrap">
+        <div class="carousel-track" id="carouselTrack">
+          <div class="carousel-slide">
+            <img src="galeria/1.jpg" alt="Trabajo 1" loading="lazy">
+            <div class="carousel-caption">Instalación de aire acondicionado</div>
+          </div>
+          <div class="carousel-slide">
+            <img src="galeria/2.jpg" alt="Trabajo 2" loading="lazy">
+            <div class="carousel-caption">Mantenimiento preventivo</div>
+          </div>
+          <div class="carousel-slide">
+            <img src="galeria/3.jpg" alt="Trabajo 3" loading="lazy">
+            <div class="carousel-caption">Instalación eléctrica</div>
+          </div>
+          <div class="carousel-slide">
+            <img src="galeria/4.jpg" alt="Trabajo 4" loading="lazy">
+            <div class="carousel-caption">Panel solar residencial</div>
+          </div>
+          <div class="carousel-slide">
+            <img src="galeria/5.jpg" alt="Trabajo 5" loading="lazy">
+            <div class="carousel-caption">Sistema de ventilación</div>
+          </div>
+          <div class="carousel-slide">
+            <img src="galeria/6.jpg" alt="Trabajo 6" loading="lazy">
+            <div class="carousel-caption">Proyecto comercial</div>
+          </div>
+        </div>
+        <button class="carousel-btn carousel-prev" onclick="carouselMove(-1)" aria-label="Anterior">
+          <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+        </button>
+        <button class="carousel-btn carousel-next" onclick="carouselMove(1)" aria-label="Siguiente">
+          <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+        </button>
+      </div>
+      <div class="carousel-dots" id="carouselDots"></div>
+    </div>
+
+    <!-- Footer sutil -->
+    <div style="text-align:center;padding:20px 20px 28px;font-size:12px;letter-spacing:0.5px;color:rgba(255,255,255,0.75);">
+      <div>Una tarjeta <strong style="color:#fff;">EcoConecta®</strong></div>
+      <div>por <a href="https://wa.me/524778811195?text=Hola%2C%20me%20interesa%20tener%20mi%20tarjeta%20digital" target="_blank" rel="noopener" style="color:#00c8e8;text-decoration:none;font-weight:600;letter-spacing:1px;">DARAN™ STUDIO</a></div>
+    </div>
+  </div>
+
+  <!-- QR Modal -->
+  <div id="qrOverlay" class="qr-overlay" role="dialog" aria-modal="true" aria-label="Código QR" onclick="handleOverlayClick(event)">
+    <div class="qr-card">
+      <p class="qr-label">Escanea para contactarme</p>
+      <div class="qr-img-wrap">
+        <img src="imagenes/QR DEMO.jpg" alt="Código QR Ángel Durán Monte">
+      </div>
+      <button class="qr-close" onclick="closeQR()">Cerrar</button>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    function openQR(){
+      document.getElementById('qrOverlay').classList.add('active');
+      document.body.style.overflow='hidden';
+    }
+    function closeQR(){
+      document.getElementById('qrOverlay').classList.remove('active');
+      document.body.style.overflow='';
+    }
+    function handleOverlayClick(e){
+      if(e.target===document.getElementById('qrOverlay')) closeQR();
+    }
+
+    function showToast(msg){
+      const t=document.getElementById('toast');
+      t.textContent=msg; t.classList.add('show');
+      setTimeout(()=>t.classList.remove('show'),3000);
+      return true;
+    }
+
+    function shareCard(){
+      const url='https://demo-beta-sage.vercel.app/';
+      const shareData={title:document.title,text:document.title,url};
+      if(navigator.share){
+        navigator.share(shareData)
+          .then(()=>showToast('Enlace compartido exitosamente'))
+          .catch(()=>{});
+      } else {
+        navigator.clipboard.writeText(url).then(()=>showToast('Enlace copiado al portapapeles'));
+      }
+    }
+
+    // ===== Carrusel =====
+    (function(){
+      const track = document.getElementById('carouselTrack');
+      const dotsWrap = document.getElementById('carouselDots');
+      if(!track) return;
+      const slides = track.querySelectorAll('.carousel-slide');
+      const total = slides.length;
+      let current = 0;
+      let autoTimer;
+
+      slides.forEach((_,i)=>{
+        const d = document.createElement('button');
+        d.className = 'carousel-dot' + (i===0?' active':'');
+        d.setAttribute('aria-label','Ir a imagen '+(i+1));
+        d.onclick = ()=>goTo(i);
+        dotsWrap.appendChild(d);
+      });
+
+      function goTo(n){
+        current = (n + total) % total;
+        track.style.transform = `translateX(-${current*100}%)`;
+        dotsWrap.querySelectorAll('.carousel-dot').forEach((d,i)=>
+          d.classList.toggle('active', i===current));
+        resetAuto();
+      }
+
+      window.carouselMove = (dir)=> goTo(current + dir);
+
+      function resetAuto(){
+        clearInterval(autoTimer);
+        autoTimer = setInterval(()=>goTo(current+1), 4000);
+      }
+      resetAuto();
+
+      let startX=0;
+      track.addEventListener('touchstart',e=>startX=e.touches[0].clientX,{passive:true});
+      track.addEventListener('touchend',e=>{
+        const diff = startX - e.changedTouches[0].clientX;
+        if(Math.abs(diff)>40) goTo(current + (diff>0?1:-1));
+      },{passive:true});
+    })();
+  </script>
+</body>
+</html>
