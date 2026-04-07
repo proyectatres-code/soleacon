@@ -166,7 +166,14 @@
     /* ===== Tarjeta de contacto ===== */
     .contact-info{
       background:#fff;margin:20px;border-radius:16px;padding:24px;
-      box-shadow:0 8px 32px rgba(0,0,0,.1)
+      box-shadow:0 8px 32px rgba(0,0,0,.1);
+      max-width:680px;
+    }
+    @media (min-width:600px){
+      .contact-info{ margin:20px auto; }
+    }
+    @media (min-width:900px){
+      .contact-info{ max-width:960px; }
     }
     .contact-item{display:flex;align-items:flex-start;gap:15px;padding:14px 0;border-bottom:1px solid #f0f0f0;transition:background .25s ease}
     .contact-item:last-child{border-bottom:none}
@@ -206,7 +213,14 @@
     /* ===== Redes ===== */
     .social-section{
       background:#fff;margin:20px;border-radius:16px;padding:18px;
-      box-shadow:0 8px 32px rgba(0,0,0,.1)
+      box-shadow:0 8px 32px rgba(0,0,0,.1);
+      max-width:680px;
+    }
+    @media (min-width:600px){
+      .social-section{ margin:20px auto; }
+    }
+    @media (min-width:900px){
+      .social-section{ max-width:960px; }
     }
     .social-title{font-size:20px;font-weight:700;color:#333;margin-bottom:12px;text-align:center}
     .social-links{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
