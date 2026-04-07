@@ -215,33 +215,7 @@
     .social-btn img{width:clamp(26px,5vw,34px);height:clamp(26px,5vw,34px);margin-bottom:6px}
     .social-btn span{font-size:clamp(9px,2.2vw,10px);letter-spacing:.5px;text-transform:uppercase;font-weight:700}
 
-    /* ===== Servicios ===== */
-    .services-section{
-      background:#fff;margin:20px;border-radius:16px;padding:18px 18px 22px;
-      box-shadow:0 8px 32px rgba(0,0,0,.1)
-    }
-    .services-title{font-size:20px;font-weight:700;color:#333;margin-bottom:4px;text-align:center}
-    .services-subtitle{font-size:13px;color:#888;text-align:center;margin-bottom:14px}
-    .services-grid{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:10px;
-    }
-    .service-card{
-      background:#f8f9fa;border-radius:12px;padding:14px 12px;
-      border:1px solid #f0f0f0;
-      transition:transform .15s ease, box-shadow .15s ease;
-    }
-    .service-card:hover{transform:translateY(-2px);box-shadow:0 4px 14px rgba(0,0,0,.09)}
-    .service-icon{
-      width:40px;height:40px;border-radius:10px;
-      background:#fff3e0;
-      display:flex;align-items:center;justify-content:center;
-      margin-bottom:10px;
-    }
-    .service-icon svg{width:22px;height:22px;fill:#e07b00}
-    .service-card h3{font-size:13px;font-weight:700;color:#1a1a2e;margin-bottom:5px;line-height:1.2}
-    .service-card p{font-size:11.5px;color:#666;line-height:1.45}
+
 
     /* ===== Galería ===== */
     .gallery-section{
@@ -253,12 +227,11 @@
     .carousel-track{
       display:flex;transition:transform .45s cubic-bezier(.4,0,.2,1);
       will-change:transform;
-      height:100%;
     }
     .carousel-slide{
-      min-width:400px;width:400px;position:relative;
+      min-width:100%;position:relative;
       height:300px;
-      background:#f0f0f0;overflow:hidden;flex-shrink:0;
+      background:#f0f0f0;overflow:hidden;
     }
     .carousel-slide img{
       width:100%;height:100%;object-fit:cover;
@@ -294,89 +267,161 @@
     }
     .carousel-dot.active{background:#e07b00;transform:scale(1.25)}
 
-    /* ===== Servicios ===== */
+    /* ===== SECCIÓN SERVICIOS — estilo minisitio ===== */
     .services-section{
-      margin:20px;border-radius:16px;overflow:hidden;
-      box-shadow:0 8px 32px rgba(0,0,0,.12);
+      margin:24px 16px;
     }
+
+    /* Encabezado de sección */
     .services-header{
-      background:linear-gradient(135deg,#0a243f 0%,#134aa7 100%);
-      padding:22px 20px 18px;text-align:center;
+      text-align:center;
+      padding:0 8px 28px;
     }
     .services-eyebrow{
-      display:inline-block;background:rgba(255,165,0,.18);
-      color:#ffa94d;font-size:10px;font-weight:800;letter-spacing:1.4px;
-      text-transform:uppercase;padding:3px 12px;border-radius:20px;margin-bottom:10px;
+      display:inline-block;
+      background:rgba(255,169,77,.15);
+      color:#e07b00;
+      font-size:11px;font-weight:800;letter-spacing:1.6px;
+      text-transform:uppercase;padding:5px 16px;border-radius:30px;
+      margin-bottom:14px;
+      border:1px solid rgba(224,123,0,.25);
     }
-    .services-header-title{font-size:clamp(18px,4.5vw,22px);font-weight:800;color:#fff;margin-bottom:6px}
-    .services-header-sub{font-size:12px;color:rgba(255,255,255,.72);line-height:1.5}
+    .services-header-title{
+      font-size:clamp(26px,6vw,34px);
+      font-weight:800;
+      color:#fff;
+      line-height:1.15;
+      letter-spacing:-0.5px;
+      margin-bottom:12px;
+    }
+    .services-header-sub{
+      font-size:clamp(14px,3.2vw,16px);
+      color:rgba(255,255,255,.68);
+      line-height:1.6;
+      max-width:340px;
+      margin:0 auto;
+    }
 
-    /* Bloque principal */
-    .services-body{background:#f4f6f9;padding:16px}
+    /* Grid de tarjetas */
+    .services-body{ padding:0; }
 
     .services-label{
-      font-size:10px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;
-      color:#888;margin:0 0 10px 2px;
+      font-size:11px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;
+      color:rgba(255,255,255,.45);margin:0 0 14px 4px;
     }
-    .services-grid{
-      display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px;
-    }
-    .service-card{
-      background:#fff;border-radius:14px;padding:14px 12px 12px;
-      border:1px solid #eaeaea;
-      transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
-      position:relative;overflow:hidden;
-    }
-    .service-card::before{
-      content:'';position:absolute;top:0;left:0;right:0;height:3px;
-      background:linear-gradient(90deg,#e07b00,#ffa94d);
-      opacity:0;transition:opacity .2s ease;
-    }
-    .service-card:hover{transform:translateY(-3px);box-shadow:0 6px 18px rgba(0,0,0,.1);border-color:#ddd}
-    .service-card:hover::before{opacity:1}
-    .service-icon{
-      width:42px;height:42px;border-radius:12px;
-      background:linear-gradient(135deg,#fff3e0,#ffe0b2);
-      display:flex;align-items:center;justify-content:center;margin-bottom:10px;
-    }
-    .service-icon svg{width:22px;height:22px;fill:#e07b00}
-    .service-card h3{font-size:15px;font-weight:700;color:#1a1a2e;margin-bottom:4px;line-height:1.2}
-    .service-card p{font-size:13px;color:#777;line-height:1.45}
 
-    /* ===== Grid servicios ===== */
-    .svc-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:10px;}
-    .svc-slide-inner{
-      display:flex;align-items:center;gap:14px;
-      background:#fff;border-radius:12px;padding:16px;
-      border:1px solid #eaeaea;border-left:4px solid #e07b00;
+    .services-grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:16px;
+      margin-bottom:16px;
     }
-    .svc-slide-inner .service-icon{flex-shrink:0;margin-bottom:0;}
-    .svc-text h3{font-size:15px;font-weight:700;color:#1a1a2e;margin-bottom:4px;}
-    .svc-text p{font-size:13px;color:#777;line-height:1.5;}
+
+    /* Tarjeta con imagen estilo CoolAir */
+    .service-card{
+      background:#fff;
+      border-radius:20px;
+      overflow:hidden;
+      box-shadow:0 8px 32px rgba(0,0,0,.18);
+      transition:transform .2s ease, box-shadow .2s ease;
+    }
+    .service-card:hover{
+      transform:translateY(-4px);
+      box-shadow:0 14px 40px rgba(0,0,0,.22);
+    }
+
+    /* Imagen de la tarjeta */
+    .service-card-img{
+      position:relative;
+      height:200px;
+      overflow:hidden;
+      background:#0a243f;
+    }
+    .service-card-img img{
+      width:100%;height:100%;
+      object-fit:cover;object-position:center;
+      display:block;
+      transition:transform .5s ease;
+    }
+    .service-card:hover .service-card-img img{
+      transform:scale(1.05);
+    }
+
+    /* Badge de ícono sobre la imagen */
+    .service-icon{
+      position:absolute;top:14px;left:14px;
+      width:52px;height:52px;border-radius:14px;
+      background:linear-gradient(135deg,#134aa7,#0a243f);
+      display:flex;align-items:center;justify-content:center;
+      box-shadow:0 4px 14px rgba(0,0,0,.35);
+      border:1.5px solid rgba(255,255,255,.2);
+    }
+    .service-icon svg{width:26px;height:26px;fill:#fff}
+
+    /* Cuerpo de la tarjeta */
+    .service-card-body{
+      padding:20px 18px 22px;
+    }
+    .service-card h3{
+      font-size:clamp(18px,4.5vw,21px);
+      font-weight:800;
+      color:#0a243f;
+      margin-bottom:8px;
+      line-height:1.15;
+      letter-spacing:-0.2px;
+    }
+    .service-card p{
+      font-size:clamp(13px,3.2vw,15px);
+      color:#5a6478;
+      line-height:1.6;
+      margin-bottom:16px;
+    }
+    .service-card-btn{
+      display:inline-flex;align-items:center;gap:6px;
+      font-size:13px;font-weight:800;letter-spacing:.5px;
+      color:#134aa7;text-decoration:none;
+      border:2px solid #134aa7;
+      border-radius:30px;padding:8px 20px;
+      transition:background .15s ease,color .15s ease;
+    }
+    .service-card-btn:hover{
+      background:#134aa7;color:#fff;
+    }
+    .service-card-btn svg{width:14px;height:14px;fill:currentColor}
 
     /* Servicios secundarios */
     .services-secondary{
-      background:#fff;border-radius:14px;padding:18px;border:1px solid #eaeaea;
+      background:rgba(255,255,255,.08);
+      border-radius:18px;padding:18px 16px;
+      border:1px solid rgba(255,255,255,.14);
+      backdrop-filter:blur(4px);
+      margin-top:4px;
     }
     .services-secondary-title{
-      font-size:14px;font-weight:800;color:#e07b00;letter-spacing:.8px;
-      text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px;
+      font-size:11px;font-weight:800;color:rgba(255,169,77,.9);letter-spacing:1px;
+      text-transform:uppercase;margin-bottom:14px;
+      display:flex;align-items:center;gap:6px;
     }
-    .secondary-grid{display:grid;grid-template-columns:1fr;gap:10px}
+    .secondary-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
     .secondary-card{
-      display:flex;align-items:center;gap:14px;
-      background:#f8f9fa;border-radius:12px;padding:14px;
-      border:1px solid #f0f0f0;
+      display:flex;align-items:center;gap:10px;
+      background:rgba(255,255,255,.07);
+      border-radius:12px;padding:12px 10px;
+      border:1px solid rgba(255,255,255,.1);
       transition:background .15s ease;
     }
-    .secondary-card:hover{background:#fff3e0}
+    .secondary-card:hover{background:rgba(255,255,255,.14)}
     .secondary-icon{
-      width:44px;height:44px;border-radius:10px;flex-shrink:0;
-      background:linear-gradient(135deg,#fff3e0,#ffe0b2);
+      width:34px;height:34px;border-radius:9px;flex-shrink:0;
+      background:rgba(255,169,77,.15);
       display:flex;align-items:center;justify-content:center;
     }
-    .secondary-icon svg{width:22px;height:22px;fill:#e07b00}
-    .secondary-card span{font-size:15px;font-weight:700;color:#333;line-height:1.2}
+    .secondary-icon svg{width:17px;height:17px;fill:#ffa94d}
+    .secondary-card span{
+      font-size:clamp(11px,2.8vw,13px);
+      font-weight:700;color:rgba(255,255,255,.88);
+      line-height:1.25;
+    }
 
     /* ===== Equipos ===== */
     .equipo-section{
@@ -537,7 +582,7 @@
         </div>
         <div class="contact-details">
           <h3>Email</h3>
-          <a id="email" class="clickable-link" href="mailto:cotizaciones_soleacon@outlook.com" onclick="showToast('Abriendo aplicación de email...')">cotizaciones_soleacon@outlook.com</a>
+          <a id="email" class="clickable-link" href="/cdn-cgi/l/email-protection#e98a869d8093888a8086878c9ab69a86858c888a8687a9869c9d85868682c78a8684" onclick="showToast('Abriendo aplicación de email...')"><span class="__cf_email__" data-cfemail="b2d1ddc6dbc8d3d1dbdddcd7c1edc1ddded7d3d1dddcf2ddc7c6deddddd99cd1dddf">[email&#160;protected]</span></a>
         </div>
       </div>
 
@@ -594,16 +639,116 @@
       <div class="services-body">
 
         <p class="services-label">Servicios principales</p>
-        <div class="svc-grid">
-            <div class="svc-slide-inner"><div class="service-icon"><svg viewBox="0 0 24 24"><path d="M22 11h-4.17l3.24-3.24-1.41-1.42L15 11h-2V9l4.66-4.66-1.42-1.41L13 6.17V2h-2v4.17L7.76 2.93 6.34 4.34 11 9v2H9L4.34 6.34 2.93 7.76 6.17 11H2v2h4.17l-3.24 3.24 1.41 1.42L9 13h2v2l-4.66 4.66 1.42 1.41L11 17.83V22h2v-4.17l3.24 3.24 1.42-1.41L13 15v-2h2l4.66 4.66 1.41-1.42L17.83 13H22z"/></svg></div><div class="svc-text"><h3>Aire Acondicionado</h3><p>Venta, instalación y mantenimiento residencial, comercial e industrial.</p></div></div>
-            <div class="svc-slide-inner"><div class="service-icon"><svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg></div><div class="svc-text"><h3>Mantenimiento Preventivo</h3><p>Programas para garantizar el óptimo funcionamiento de tus equipos.</p></div></div>
-            <div class="svc-slide-inner"><div class="service-icon"><svg viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg></div><div class="svc-text"><h3>Servicios Eléctricos</h3><p>Instalaciones eléctricas, cableado estructurado y soluciones de energía.</p></div></div>
-            <div class="svc-slide-inner"><div class="service-icon"><svg viewBox="0 0 24 24"><path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9.95h-2V3.5h2V.55zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.7l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4zM20 10.5v2h3v-2h-3zm-8-5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-1 16.95h2V19.5h-2v2.95zm-7.45-3.91l1.41 1.41 1.79-1.8-1.41-1.41-1.79 1.8z"/></svg></div><div class="svc-text"><h3>Paneles Solares</h3><p>Instalación de sistemas de energía solar para reducir costos.</p></div></div>
+        <div class="services-grid">
+
+          <div class="service-card">
+            <div class="service-card-img">
+              <img src="galeria/1.jpg" alt="Aire Acondicionado" loading="lazy">
+              <div class="service-icon">
+                <svg viewBox="0 0 24 24"><path d="M22 11h-4.17l3.24-3.24-1.41-1.42L15 11h-2V9l4.66-4.66-1.42-1.41L13 6.17V2h-2v4.17L7.76 2.93 6.34 4.34 11 9v2H9L4.34 6.34 2.93 7.76 6.17 11H2v2h4.17l-3.24 3.24 1.41 1.42L9 13h2v2l-4.66 4.66 1.42 1.41L11 17.83V22h2v-4.17l3.24 3.24 1.42-1.41L13 15v-2h2l4.66 4.66 1.41-1.42L17.83 13H22z"/></svg>
+              </div>
+            </div>
+            <div class="service-card-body">
+              <h3>Aire Acondicionado</h3>
+              <p>Venta, instalación y mantenimiento residencial, comercial e industrial.</p>
+              <a href="https://wa.me/5214776655037?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20aire%20acondicionado" target="_blank" rel="noopener" class="service-card-btn">
+                Solicitar
+                <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+              </a>
+            </div>
           </div>
+
+          <div class="service-card">
+            <div class="service-card-img">
+              <img src="galeria/2.jpg" alt="Mantenimiento Preventivo" loading="lazy">
+              <div class="service-icon">
+                <svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>
+              </div>
+            </div>
+            <div class="service-card-body">
+              <h3>Mantenimiento Preventivo</h3>
+              <p>Programas para garantizar el óptimo funcionamiento de tus equipos.</p>
+              <a href="https://wa.me/5214776655037?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20mantenimiento%20preventivo" target="_blank" rel="noopener" class="service-card-btn">
+                Solicitar
+                <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="service-card">
+            <div class="service-card-img">
+              <img src="galeria/3.jpg" alt="Servicios Eléctricos" loading="lazy">
+              <div class="service-icon">
+                <svg viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>
+              </div>
+            </div>
+            <div class="service-card-body">
+              <h3>Servicios Eléctricos</h3>
+              <p>Instalaciones eléctricas, cableado estructurado y soluciones de energía.</p>
+              <a href="https://wa.me/5214776655037?text=Hola%2C%20me%20interesa%20el%20servicio%20el%C3%A9ctrico" target="_blank" rel="noopener" class="service-card-btn">
+                Solicitar
+                <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="service-card">
+            <div class="service-card-img">
+              <img src="galeria/4.jpg" alt="Paneles Solares" loading="lazy">
+              <div class="service-icon">
+                <svg viewBox="0 0 24 24"><path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9.95h-2V3.5h2V.55zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.7l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4zM20 10.5v2h3v-2h-3zm-8-5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-1 16.95h2V19.5h-2v2.95zm-7.45-3.91l1.41 1.41 1.79-1.8-1.41-1.41-1.79 1.8z"/></svg>
+              </div>
+            </div>
+            <div class="service-card-body">
+              <h3>Paneles Solares</h3>
+              <p>Instalación de sistemas de energía solar para reducir costos.</p>
+              <a href="https://wa.me/5214776655037?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20paneles%20solares" target="_blank" rel="noopener" class="service-card-btn">
+                Solicitar
+                <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="service-card">
+            <div class="service-card-img">
+              <img src="galeria/5.jpg" alt="Ventilación" loading="lazy">
+              <div class="service-icon">
+                <svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 19.5 2 22 .5 22 .5 22h21S22 12 17 8z"/></svg>
+              </div>
+            </div>
+            <div class="service-card-body">
+              <h3>Ventilación</h3>
+              <p>Sistemas de ventilación para climatización integral en cualquier espacio.</p>
+              <a href="https://wa.me/5214776655037?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20ventilaci%C3%B3n" target="_blank" rel="noopener" class="service-card-btn">
+                Solicitar
+                <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="service-card">
+            <div class="service-card-img">
+              <img src="galeria/6.jpg" alt="Garantía y Soporte" loading="lazy">
+              <div class="service-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+              </div>
+            </div>
+            <div class="service-card-body">
+              <h3>Garantía y Soporte</h3>
+              <p>Respaldo completo con garantía y atención post-venta personalizada.</p>
+              <a href="https://wa.me/5214776655037?text=Hola%2C%20necesito%20soporte%20t%C3%A9cnico" target="_blank" rel="noopener" class="service-card-btn">
+                Solicitar
+                <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
         <!-- Servicios secundarios -->
         <div class="services-secondary">
           <div class="services-secondary-title">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#e07b00"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#ffa94d"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg>
             También ofrecemos
           </div>
           <div class="secondary-grid">
@@ -756,7 +901,7 @@
       }
     }
 
-    // ===== Carrusel Galería =====
+    // ===== Carrusel =====
     (function(){
       const track = document.getElementById('carouselTrack');
       const dotsWrap = document.getElementById('carouselDots');
@@ -776,27 +921,13 @@
 
       function goTo(n){
         current = (n + total) % total;
-        track.style.transform = `translateX(-${current*400}px)`;
+        track.style.transform = `translateX(-${current*100}%)`;
         dotsWrap.querySelectorAll('.carousel-dot').forEach((d,i)=>
           d.classList.toggle('active', i===current));
         resetAuto();
       }
 
       window.carouselMove = (dir)=> goTo(current + dir);
-
-      function resetAuto(){
-        clearInterval(autoTimer);
-        autoTimer = setInterval(()=>goTo(current+1), 4000);
-      }
-      resetAuto();
-
-      let startX=0;
-      track.addEventListener('touchstart',e=>startX=e.touches[0].clientX,{passive:true});
-      track.addEventListener('touchend',e=>{
-        const diff = startX - e.changedTouches[0].clientX;
-        if(Math.abs(diff)>40) goTo(current + (diff>0?1:-1));
-      },{passive:true});
-    })();
 
       function resetAuto(){
         clearInterval(autoTimer);
